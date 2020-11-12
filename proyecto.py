@@ -19,7 +19,7 @@ for a in range(0,longitud):
         xdates.append(rd['date'][a])
         ytotalcases.append(rd['total_cases'][a])
         ytotaldeaths.append(rd['total_deaths'][a])
-
+# comentario
 plt.figure(figsize=(12,5))
 plt.xlabel('fechas')
 plt.ylabel('personas en millones')
