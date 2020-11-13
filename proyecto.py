@@ -15,7 +15,6 @@ finaldate = (input('Ingrese fecha de final: '))
 
 countries = []
 cntrynumbr = int(input('Ingrese la cantidad de paises a analizar: '))
-subplotnumbr = cntrynumbr
 for i in range(cntrynumbr):
     welcome = (input('Ingrese el país deseado: ')).lower()
     if welcome in countrytable:
@@ -23,10 +22,8 @@ for i in range(cntrynumbr):
             countries.append(welcome)
         elif welcome in countries:
             print('ya eligio ese pais')
-            cntrynumbr += 1
     else:
         print('Entrada no valida')
-        cntrynumbr += 1
 
 for country in countries:
     dates = []
