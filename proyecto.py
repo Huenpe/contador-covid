@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv('full_data.csv')
 rd = df.to_dict('list')
 longitud = len(rd['location'])
+position = 1
 countrytable = []
 for k in range(0,longitud):                            
     countrytable.append((rd['location'][k]).lower())
@@ -35,34 +36,34 @@ for country in countries:
     ytotalcases = []
     ytotaldeaths = []
 
-    for a in range(0,longitud):                            #linea 35 a 39
+    for a in range(0,longitud):                            #linea 39 a 43
         if (rd['location'][a]).lower() == country:         #hace listas de todos los datos (fechas,
             dates.append(rd['date'][a])                    #contagaidos y muertos) del pais
             totalcases.append(rd['total_cases'][a])
             totaldeaths.append(rd['total_deaths'][a])
-    if (initialdate not in dates):              #linea 40 a 43, soluciona el problema si la fecha inicial o final 
+    if (initialdate not in dates):              #linea 44 a 46, soluciona el problema si la fecha inicial o final 
         initialdate = dates[0]              #elegidas no son una fecha que exista para tal pais en el .csv
         finaldate = dates[len(dates)-1]
-    for b in range(0,len(dates)):                          #linea 44 a 48
+    for b in range(0,len(dates)):                          #linea 47 a 51
             if dates[b] == initialdate:                    #toma la posicion en la lista dates de la
                 indexinitialdate = b                       # fecha inicial y la final elegidas
             elif dates[b] == finaldate:
                 indexfinaldate = b
-    for c in range(0,len(dates)):                            #linea 49 a 53
+    for c in range(0,len(dates)):                            #linea 52 a 56
         if (indexinitialdate <= c) & (c <= indexfinaldate):  #hace listas de los datos entre las fechas elegidas
-                xdates.append(dates[c])
-                ytotalcases.append(totalcases[c])
-                ytotaldeaths.append(totaldeaths[c])
+            xdates.append(dates[c])
+            ytotalcases.append(totalcases[c])
+            ytotaldeaths.append(totaldeaths[c])
 
-    plt.figure(figsize=(12,5))
-    plt.xlabel('fechas')
+    plt.subplot(int((cntrynumbr/2)+(cntrynumbr%2)),2, position)
+    position += 1
     plt.ylabel('personas en millones')
     plt.yscale('log')
     plt.plot(xdates, ytotalcases, label='contagiados')
     plt.plot(xdates, ytotaldeaths, label='fallecidos')
     plt.title('coronavirus en '+ country)
-    plt.xticks(xdates[::int(len(xdates)/20)], rotation=30)   # hace que la escala del eje x se vea mejor, no funciona bien para selecciones de intervalos de tiempo cortos
-
+    plt.xticks([xdates[0], xdates[len(xdates)-1]], visible=True, fontsize=5)
+    plt.yticks(fontsize=6)
 
 plt.legend()
 plt.show()
