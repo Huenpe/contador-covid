@@ -57,7 +57,7 @@ for country in countries:
 
     plt.subplot(int((cntrynumbr/2)+(cntrynumbr%2)),2, position)
     position += 1
-    plt.ylabel('personas en millones')
+    plt.ylabel('personas')
     plt.yscale('log')
     plt.plot(xdates, ytotalcases, label='contagiados')
     plt.plot(xdates, ytotaldeaths, label='fallecidos')
